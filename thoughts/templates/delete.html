@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+</head>
+<body>
+    {% if user.is_authenticated %}
+        {% if user.id == thoughts.owner.id %}
+            <h3>Deleting {{ thoughts.title }}</h3>
+            <form method="post">
+                {% csrf_token %}
+                <strong>Are you sure?</strong>
+                <button class="btn btn-secondary">confirm</button>
+            </form>
+        {% else %}
+            <h1>You are not the owner</h1>
+        {% endif %}
+    {% else %}
+        <h1>Login to access this page</h1>
+    {% endif %}
+</body>
+</html>
