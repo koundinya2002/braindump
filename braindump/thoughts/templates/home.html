@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Braindump</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+	<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+}
+header {
+    background-color: #ffcc80;
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    margin: 0;
+    color: #333;
+}
+.thoughts {
+    margin: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    background-color: #D6D6D6;
+    border-radius: 10px;
+}
+.blog-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+.blog-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+</style>
+</head>
+<body>
+    <header>
+        <h1>
+            Brain Dump
+        </h1>
+        logged-in as <b><i>{{ request.user }}</i></b><br>
+        <a href="{% url 'add' %}">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
+                <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
+                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+            </svg>
+        </a>
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit">logout</button>
+        </form>
+    </header>
+<section class="thoughts">
+	<section class="blog-list">
+        {% for t in thoughts %}
+        <div class="blog-card">
+            <h2>{{ t.title|safe }}</h2>
+            <p>{{ t.body|safe }}</p>
+            - {{ t.time }} | <a href="{% url 'edit' t.pk %}">edit</a> | <a href="{% url 'delete' t.pk %}">delete</a> |
+        </div>
+        {% endfor %}
+    </section>
+</section>
+
+</body>
+</html>

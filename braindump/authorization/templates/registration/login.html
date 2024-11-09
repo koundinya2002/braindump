@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brain Dump</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #e9ebee, #dfe3ee);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.login-container {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.login-description {
+    font-size: 14px;
+    color: #606770;
+    margin-bottom: 20px;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #dddfe2;
+    border-radius: 5px;
+}
+
+.login-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #1877f2;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+</style>
+</head>
+<body>
+    <div class="login-container">
+        <h1 class="login-title">Brain Dump</h1>
+        <p class="login-description">Brain Dump helps you clear out your mind by jotting down your thoughts!</p>
+        <form class="login-form" method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Log in</button>
+            New here? <a href="{% url 'register' %}">Sign-up</a> here!
+        </form>
+    </div>
+</body>
+</html>
